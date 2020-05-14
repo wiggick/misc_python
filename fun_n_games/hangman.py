@@ -1,6 +1,13 @@
 import requests
 import random
-from os import system, name
+#uncomment below and lines 123 & 124 to lookup a word defintion
+#note that not all words returned by the api are found on the Oxford site.
+#import oxford
+
+
+import requests
+
+
 
 class Hangman:
         
@@ -14,7 +21,7 @@ class Hangman:
             5:"/",
             6:"/ \\"}
         
-        self.part_order = ((1,0,0),(1,2.0),(1,3,0),(1,4,0),(1,4,5),(1,4,6))
+        self.part_order = ((1,0,0),(1,2,0),(1,3,0),(1,4,0),(1,4,5),(1,4,6))
         self.max_guess = len(self.parts)
         self.wrong_answers = 0
         self.correct = 0
@@ -59,7 +66,7 @@ class Hangman:
                     self.print_spacer(1)
                 else:
                     self.draw_part(bpart)
-            
+                                       
 
     def guess(self,letter):
         counter = -1
@@ -98,6 +105,7 @@ class Hangman:
        
 
     def start_game(self):
+        end_msg = ""
         while self.wrong_answers <= self.max_guess:
             #print(self.word)
             self.draw_body()
@@ -106,12 +114,15 @@ class Hangman:
                 print(f"Wrong Guesses:{self.guessed}")
             
             if self.correct == len(self.word):
-                print("stay of execution")
-                return;
-                
-            if self.wrong_answers == self.max_guess:
-                print(f"executed\nThe Word was {self.word}")
-                return 
+                end_msg = "stay of execution"      
+            elif self.wrong_answers == self.max_guess:
+                end_msg = f"executed\nThe Word was {self.word}"
+
+            if end_msg != "":
+                print(end_msg)
+                #definition = oxford.get_definition(self.word)
+                #print(definition)
+                return
             
             answer = input("Guess a Letter:")
                 
@@ -120,7 +131,8 @@ class Hangman:
                 self.wrong_answers += 1
                 if answer not in self.guessed:
                     self.guessed += answer
-                
+                    
+              
                 
 def main():
     hanger = Hangman()
