@@ -2,8 +2,8 @@ import requests
 import json
 
 #uses https://developer.oxforddictionaries.com/faq and get an API App ID and Key
-app_id = "<your Application ID"
-app_key = "<your Application Key"
+app_id = "your Application ID"
+app_key = "your Application Key"
 language = "en-gb"
 base_url ="https://od-api.oxforddictionaries.com/api/v2" 
 
